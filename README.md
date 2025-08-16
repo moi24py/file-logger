@@ -1,4 +1,4 @@
-# File logger 🐶
+# File logger :dog:
 
 <p> I developed a file logger for a hypothetical Linux-based embedded medical device designed for animals. The device is worn by a medium-sized dog. During setup, a patient profile is configured with attributes corresponding to the specific animal, which determines the normal operating ranges for key physiological parameters: body temperature, heart rate, and blood oxygen saturation (SpO₂).</p>
 The output log file, `system.log`, records a notification whenever any of the monitored parameters fall outside the expected range for a medium-sized dog:
@@ -9,3 +9,13 @@ The output log file, `system.log`, records a notification whenever any of the mo
 
 Since I didn't have access to real sensors or embedded hardware, I simulated the input by generating a `.csv` file containing random values for each monitored parameter.
 
+### Project directory structure
+📁 file-logger/
+├── Makefile
+├── src/
+│   └── main.c
+├── data/
+│   ├── generate_sensor_inputs.c
+│   └── sensors_input.csv
+├── build/
+└── system.log
