@@ -10,6 +10,7 @@ The output log file, `system.log`, records a notification whenever any of the mo
 Since I didn't have access to real sensors or embedded hardware, I simulated the input by generating a `.csv` file containing random values for each monitored parameter.
 
 ### Project directory structure
+```css
 📁 file-logger/
 ├── Makefile
 ├── src/
@@ -18,4 +19,6 @@ Since I didn't have access to real sensors or embedded hardware, I simulated the
 │   ├── generate_sensor_inputs.c
 │   └── sensors_input.csv
 ├── build/
+│   └── logger.c
 └── system.log
+```
