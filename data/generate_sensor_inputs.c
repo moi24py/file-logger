@@ -13,6 +13,10 @@ typedef struct Parameters{
 } params;
 
 int main() {
+    srand(time(NULL));
+    int i;
+    for (i = 0; i < 50; i++){
+
     /* Array that will store current date and time */
     char datetime[20];
     size_t len = sizeof(datetime);
@@ -36,9 +40,9 @@ int main() {
     if (ths == NULL){
         perror("Cannot allocate memory for ths pointer");
     }
-    ths->temp = 39.2f;
-    ths->hr = 98;
-    ths->spo2 = 99;
+    ths->temp = rand() % 44;
+    ths->hr = rand() % 121;
+    ths->spo2 = rand() % 101;
 
     /* Open sensors_data.csv */
     FILE *fp = fopen("sensors_data.csv", "a");
@@ -76,6 +80,7 @@ int main() {
 
     free(ths);
 
+    }
     return 0;
 }
 
@@ -100,5 +105,3 @@ int formatted_datetime(char *buffer, size_t size, struct tm *now){
     }
     return written_bytes;
 }
-
-/* TODO: Function that generates pseudo random numbers */
