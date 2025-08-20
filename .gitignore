@@ -6,7 +6,6 @@ system.log
 /data/generate_sensor_inputs.dSYM/Contents
 /data/.DS_Store
 /build/
-main
 
 .DS_Store
 .vscode/
