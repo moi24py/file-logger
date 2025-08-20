@@ -18,7 +18,5 @@ Since I didn't have access to real sensors or embedded hardware, I simulated the
 ├── data/
 │   ├── generate_sensor_inputs.c
 │   └── sensors_input.csv
-├── build/
-│   └── logger.c
 └── system.log
 ```
