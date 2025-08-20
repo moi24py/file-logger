@@ -8,13 +8,13 @@ int log_if_out_of_range(FILE *log_file, const char *datetime, float temp, int hr
 
 int main() {
     // Open sensors_data.csv
-    FILE *fp = fopen("data/sensors_data.csv", "r");
+    FILE *fp = fopen("../data/sensors_data.csv", "r");
     if (!fp) {
         perror("Cannot open sensors_data.csv");
         return 1;
     }
     // Open system.log
-    FILE *log = fopen("system.log", "a");
+    FILE *log = fopen("../system.log", "a");
     if (!log) {
         perror("Cannot open system.log");
         fclose(fp);
