@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 
 struct tm* get_datetime();
 int formatted_datetime(char *buffer, size_t size, struct tm *now);
+
+/* Structure for random parameters */
+typedef struct Parameters{
+    float temp;
+    unsigned short hr;
+    unsigned short spo2;
+} params;
 
 int main() {
     /* Array that will store current date and time */
@@ -23,6 +31,15 @@ int main() {
         return 1;
     }
 
+    /* Struct that stores one temperature, one heart rate, one spO2 */
+    params *ths = malloc(sizeof(params));
+    if (ths == NULL){
+        perror("Cannot allocate memory for ths pointer");
+    }
+    ths->temp = 39.2f;
+    ths->hr = 98;
+    ths->spo2 = 99;
+
     /* Open sensors_data.csv */
     FILE *fp = fopen("sensors_data.csv", "a");
     if (fp == NULL){
@@ -31,23 +48,33 @@ int main() {
     }
     printf("sensors_data.csv opened\n");
 
-    /* Write in sensors_data.csv */
-    size_t written = fwrite(datetime, 1, actually_written, fp); // date and time
-    if (written != (size_t)actually_written) {
+    /* Write to sensors_data.csv*/
+    size_t written = fprintf(fp, "%s", datetime); // write current date and time
+    if (written < 0) {
         perror("Error writing to file");
         fclose(fp);
         return 1;
     }
+    fflush(fp); // clean buffer, force write in file
+    printf("date and time successfully written to sensors_data.csv\n");
 
-    /* Clean buffer, force write in file */
-    fflush(fp);
-    printf("Date and time successfully written to sensors_data.csv\n");
+    written = fprintf(fp, ",%.1f,%d,%d\n", ths->temp, ths->hr, ths->spo2); // write temp, hr, spo2
+    if (written < 0) {
+        perror("Error writing to file");
+        fclose(fp);
+        return 1;
+    }
+    fflush(fp); // clean buffer, force write in file
+    printf("params successfully written to sensors_data.csv\n");
 
     /* Close sensors_data.csv */
     if (fclose(fp) != 0){
         perror("Error closing sensors_data.csv");
         return 1;
     }
+    printf("sensors.csv closed\n");
+
+    free(ths);
 
     return 0;
 }
@@ -73,3 +100,5 @@ int formatted_datetime(char *buffer, size_t size, struct tm *now){
     }
     return written_bytes;
 }
+
+/* TODO: Function that generates pseudo random numbers */
