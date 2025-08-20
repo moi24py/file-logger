@@ -72,13 +72,13 @@ int log_if_out_of_range(FILE *log_file, const char *datetime, float temp, int hr
     int written;
     int error_flag = 0;
     // Check temperature
-    if (temp < 37.2 || temp > 39.2) {
+    if (temp < 37.7 || temp > 39.2) {
         written = fprintf(log_file, "%s Temperature out of range: %.1f\n", datetime, temp);
         if (written < 0) return -1;
         error_flag = 1;
     }
     // Check heart rate
-    if (hr < 50 || hr > 100) {
+    if (hr < 60 || hr > 100) {
         written = fprintf(log_file, "%s Heart rate out of range: %d\n", datetime, hr);
         if (written < 0) return -1;
         error_flag = 1;
